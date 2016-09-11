@@ -1,7 +1,7 @@
 # You can put your build options here
 -include config.mk
 
-all: libjsmn.a 
+all: libjsmn.a test simple jsondump
 
 libjsmn.a: jsmn.o
 	$(AR) rc $@ $^
@@ -23,9 +23,7 @@ test_strict_links: test/tests.c
 	$(CC) -DJSMN_STRICT=1 -DJSMN_PARENT_LINKS=1 $(CFLAGS) $(LDFLAGS) $< -o test/$@
 	./test/$@
 
-jsmn_test.o: jsmn_test.c libjsmn.a
-
-simple_example: example/simple.o libjsmn.a
+simple: example/simple.o libjsmn.a
 	$(CC) $(LDFLAGS) $^ -o $@
 
 jsondump: example/jsondump.o libjsmn.a
