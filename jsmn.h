@@ -2,6 +2,8 @@
 #define __JSMN_H_
 
 #include <stddef.h>
+#include <stdbool.h>
+#include <string.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -68,6 +70,11 @@ void jsmn_init(jsmn_parser *parser);
  */
 int jsmn_parse(jsmn_parser *parser, const char *js, size_t len,
 		jsmntok_t *tokens, unsigned int num_tokens);
+
+/**
+ * Compares token from JSON haystack with string
+ */
+bool jsmn_equals(const char* json, jsmntok_t* tok, const char* s);
 
 #ifdef __cplusplus
 }

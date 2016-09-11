@@ -1,6 +1,20 @@
 #include "jsmn.h"
 
 /**
+ * Compares token from JSON haystack with string
+ */
+bool jsmn_equals(const char *json, jsmntok_t *tok, const char *s)
+{
+	if (tok->type == JSMN_STRING
+	&& (int) strlen(s) == tok->end - tok->start
+	&& strncmp(json + tok->start, s, tok->end - tok->start) == 0)
+	{
+		return true;
+	}
+	return false;
+}
+
+/**
  * Allocates a fresh unused token from the token pull.
  */
 static jsmntok_t *jsmn_alloc_token(jsmn_parser *parser,
